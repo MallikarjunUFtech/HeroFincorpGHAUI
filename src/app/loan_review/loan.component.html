@@ -1,0 +1,508 @@
+<div class="container loan_page">
+<form name="form1" #f="ngForm"  novalidate>
+<div class="portlet-title">
+  <div class="caption">  <font style="font-size: 19px;color: blue;">Insured Person Details</font></div>
+</div>
+<div class="portlet-body planbox" style="color: #000;">                 
+<hr class="new1">
+  <div class="row lmsresbor">
+
+  <div class="col-md-3">  
+    <div class="form-group">
+      <label>Salutation</label>
+      <select id="salutation" placeholder="salutation"  name="salutation" [(ngModel)]="loanForm.salutation"  #salutation="ngModel" [ngClass]="{ 'is-invalid': f.submitted && salutation.invalid }" class="form-control rounded input-sm" required>
+             <option *ngFor="let sal of Salutations" [ngValue]="sal">{{sal}}</option> 
+            </select> 
+    <div *ngIf="f.submitted && salutation.invalid" class="invalid-feedback">
+        <div *ngIf="salutation.errors.required">Salutation is required</div>
+    </div>
+    </div>
+   </div>
+
+    <div class="col-md-3">  
+    <div class="form-group" >
+      <label>First Name</label>
+    <input type="text" class="form-control"   name="firstName" [(ngModel)]="loanForm.firstName" #firstName="ngModel" [ngClass]="{ 'is-invalid': f.submitted && firstName.invalid }" required>
+    <div *ngIf="f.submitted && firstName.invalid" class="invalid-feedback">
+        <div *ngIf="firstName.errors.required">FIrst Name is required</div>
+    </div>
+    </div>
+   </div>
+
+    <div class="col-md-3">  
+    <div class="form-group">
+      <label>Last Name</label>
+    <input type="text" class="form-control"  name="lastName" [(ngModel)]="loanForm.lastName" #lastName="ngModel" [ngClass]="{ 'is-invalid': f.submitted && lastName.invalid }" required>
+    <div *ngIf="f.submitted && lastName.invalid" class="invalid-feedback">
+        <div *ngIf="lastName.errors.required">Last Name is required</div>
+    </div>
+    </div>
+   </div>
+
+    <div class="col-md-3">  
+    <div class="form-group">
+      <label>Gender</label>
+       <select id="gender" placeholder="Gender"  name="gender"  [(ngModel)]="loanForm.gender" #gender="ngModel" [ngClass]="{ 'is-invalid': f.submitted && gender.invalid }" class="form-control rounded input-sm" required>
+                <option *ngFor="let gen of gender_data" value={{gen}}>{{gen}}</option>
+            </select> 
+    <div *ngIf="f.submitted && gender.invalid" class="invalid-feedback">
+        <div *ngIf="gender.errors.required">Gender is required</div>
+    </div>
+    </div>
+   </div>
+ </div>
+   <div class="row lmsresbor">
+
+    <div class="col-md-3">  
+    <div class="form-group">
+      <label>Date Of Birth </label>
+    <input type="text" class="form-control input-sm custom-date-after ng-pristine ng-untouched ng-valid"  name="age"  [(ngModel)]="loanForm.age" #age="ngModel"  readonly="">
+    </div>
+   </div>
+
+    <div class="col-md-3">  
+    <div class="form-group">
+      <label>Mobile Number</label>
+    <input type="text" class="form-control input-sm custom-date-after ng-pristine ng-untouched ng-valid"  name="mobile" (keypress)="restrictAlphabets($event);" (keyup)="mobileValidate($event);" maxlength="10" [(ngModel)]="loanForm.mobile" #mobile="ngModel" [ngClass]="{ 'is-invalid': f.submitted && mobile.invalid }" required>
+   <div id="mobilewar" class="invalid-feedback">please enter a valid 10-digit mobile number</div>  
+    </div>
+   </div>
+
+    <div class="col-md-3">  
+    <div class="form-group">
+      <label>Email</label>
+    <input type="text" class="form-control input-sm custom-date-after ng-pristine ng-untouched ng-valid" name="email"   (keyup)="email_validate($event)" [(ngModel)]="loanForm.email" #email="ngModel" [ngClass]="{ 'is-invalid': f.submitted && email.invalid }" required>
+    <div id="emailwar" class="invalid-feedback">
+          Please enter a valid email address
+        </div>
+    </div>
+   </div>
+
+
+    <div class="col-md-3">  
+    <div class="form-group">
+      <label>Address 1 </label>
+    <input type="text" class="form-control input-sm custom-date-after ng-pristine ng-untouched ng-valid" name="address1"   [(ngModel)]="loanForm.address1" #address1="ngModel" [ngClass]="{ 'is-invalid': f.submitted && address1.invalid }" required>
+    <div *ngIf="f.submitted && address1.invalid" class="invalid-feedback">
+        <div *ngIf="address1.errors.required">Address1 is required</div>
+    </div>
+    </div>
+   </div>
+
+
+
+ </div>
+   <div class="row lmsresbor">
+
+
+
+    <div class="col-md-3">  
+    <div class="form-group">
+      <label>Address 2 </label>
+    <input type="text" class="form-control input-sm custom-date-after ng-pristine ng-untouched ng-valid" name="address2"  [(ngModel)]="loanForm.address2" #address2="ngModel">
+    </div>
+   </div>
+
+    <div class="col-md-3">  
+    <div class="form-group">
+      <label>Address 3 </label>
+    <input type="text" class="form-control input-sm custom-date-after ng-pristine ng-untouched ng-valid" name="address3"   [(ngModel)]="loanForm.address3" #address3="ngModel" >
+    </div>
+   </div>
+
+
+    <div class="col-md-3">  
+    <div class="form-group">
+      <label>Pincode</label>
+    <input type="text" class="form-control input-sm custom-date-after ng-pristine ng-untouched ng-valid" name="pincode"  [(ngModel)]="loanForm.pincode" #pincode="ngModel" [ngClass]="{ 'is-invalid': f.submitted && pincode.invalid }" required>
+    <div *ngIf="f.submitted && pincode.invalid" class="invalid-feedback">
+        <div *ngIf="pincode.errors.required">Pincode is required</div>
+    </div>
+    </div>
+   </div>
+
+    <div class="col-md-3">  
+    <div class="form-group">
+      <label>City</label>
+    <input type="text" class="form-control input-sm custom-date-after ng-pristine ng-untouched ng-valid" name="city"  [(ngModel)]="loanForm.city" #city="ngModel" [ngClass]="{ 'is-invalid': f.submitted && city.invalid }" required>
+    <div *ngIf="f.submitted && city.invalid" class="invalid-feedback">
+        <div *ngIf="city.errors.required">City is required</div>
+    </div>
+    </div>
+   </div>
+ </div>
+
+   <div class="row lmsresbor">
+    <div class="col-md-3">  
+    <div class="form-group">
+      <label>State </label>
+    <input type="text" class="form-control input-sm custom-date-after ng-pristine ng-untouched ng-valid" name="state"  [(ngModel)]="loanForm.state" #state="ngModel" [ngClass]="{ 'is-invalid': f.submitted && state.invalid }" required>
+    <div *ngIf="f.submitted && state.invalid" class="invalid-feedback">
+        <div *ngIf="state.errors.required">State is required</div>
+    </div>
+    </div>
+   </div>
+
+</div>
+</div>
+
+
+
+
+<div class="portlet-title">
+     <div class="caption"> <font style="font-size: 19px;color: blue;">Premium Details</font></div>
+ </div>
+
+<hr class="new1">
+
+<div class="row lmsresbor">
+
+
+   <div class="col-md-3">  
+    <div class="form-group">
+      <label> Policy Start Date</label>
+    <input type="text" class="form-control input-sm custom-date-after ng-pristine ng-untouched ng-valid"    name="policy_start" [(ngModel)]="loanForm.policy_start" #policy_start="ngModel" readOnly >
+    </div>
+   </div>
+
+ <div class="col-md-3">  
+    <div class="form-group">
+      <label> Policy End Date</label>
+    <input type="text" class="form-control input-sm custom-date-after ng-pristine ng-untouched ng-valid"   name="policy_end" [(ngModel)]="loanForm.policy_end" #policy_end="ngModel" readOnly>
+    </div>
+   </div>
+
+ <div class="col-md-3 ">  
+    <div class="form-group">
+      <label> Select Plan</label>
+    <input type="text" class="form-control input-sm custom-date-after ng-pristine ng-untouched ng-valid"    name="family" [(ngModel)]="loanForm.family" #family="ngModel" readOnly>
+    </div>
+   </div>
+
+
+
+ <div class="col-md-3">  
+    <div class="form-group">
+      <label> SumInsured</label>
+    <input type="text" class="form-control input-sm custom-date-after ng-pristine ng-untouched ng-valid"      name="sumAssured" [(ngModel)]="loanForm.sumAssured" #sumAssured="ngModel" readOnly>
+    </div>
+   </div>
+ </div>
+    <div class="row lmsresbor">
+
+ <div class="col-md-3">  
+    <div class="form-group">
+      <label>Premium Without GST</label>
+    <input type="text" class="form-control input-sm custom-date-after ng-pristine ng-untouched ng-valid"    name="premium" [(ngModel)]="loanForm.premium" #premium="ngModel" readOnly>
+    </div>
+   </div>
+
+   <div class="col-md-3">  
+    <div class="form-group">
+      <label>GST</label>
+    <input type="text" class="form-control input-sm custom-date-after ng-pristine ng-untouched ng-valid"  name="tax" [(ngModel)]="loanForm.tax" #tax="ngModel" readOnly >
+    </div>
+   </div>
+
+    <div class="col-md-3">  
+    <div class="form-group">
+      <label>Premium Inclusive of Tax</label>
+    <input type="text" class="form-control input-sm custom-date-after ng-pristine ng-untouched ng-valid"   name="totalpremium" [(ngModel)]="loanForm.totalpremium" #totalpremium="ngModel" readOnly>
+    </div>
+   </div>
+
+
+
+</div>
+
+
+
+
+
+
+<div class="portlet-title">
+     <div class="caption"> <font style="font-size: 19px;color: blue;">Family Details</font></div>
+ </div>
+
+<div class="portlet-body planbox" style="color: #000;">
+ <div>
+
+<hr class="new1">
+<div class="row " style="width: 100%;padding-left: 19px;">
+  <table class="table user_data table-bordered">
+    <thead>
+      <tr style="color: white;background: #003399;">
+        <th>Name of the Member</th>
+        <th>Relationship with Proposer</th>
+        <th>DOB</th>
+        <th>Gender</th>
+        <th>Height</th>
+        <th>Weight</th>
+      </tr>
+    </thead>
+
+    <tbody>
+
+      <!-- <tr>
+        <td>{{dep_response1.name}}</td>
+        <td>self</td>
+        <td>{{dep_response1.DOB}}</td>
+        <td>{{dep_response1.gender}}</td>
+        <td>{{dep_response1.height}}</td>
+        <td>{{dep_response1.weight}}</td>
+      </tr> -->
+    </tbody>
+
+  
+  </table>
+</div>
+
+</div>
+</div>
+
+
+<div class="row">
+<div class="col-md-4"><font style="font-size: 19px;color: blue;">Nominee Details</font></div>
+<div class="col-md-4"></div>
+</div>
+<hr class="new1">
+<div class="row lmsresbor">
+
+   <div class="col-md-3">  
+    <div class="form-group">
+      <label>Nominee Name</label>
+    <input type="text" class="form-control" name="gha_nominee"   [(ngModel)]="loanForm.gha_nominee" #gha_nominee="ngModel" [ngClass]="{ 'is-invalid': f.submitted && gha_nominee.invalid }" required>
+    <div *ngIf="f.submitted && gha_nominee.invalid" class="invalid-feedback">
+        <div *ngIf="gha_nominee.errors.required">Nominee Name is required</div>
+    </div>
+    </div>
+   </div>
+
+   <div class="col-md-3">  
+    <div class="form-group">
+      <label>Nominee Relation</label>
+    <input type="text" class="form-control" name="gha_nominee_relation"      [(ngModel)]="loanForm.gha_nominee_relation" #gha_nominee_relation="ngModel" [ngClass]="{ 'is-invalid': f.submitted && gha_nominee_relation.invalid }" required>
+    <div *ngIf="f.submitted && gha_nominee_relation.invalid" class="invalid-feedback">
+        <div *ngIf="gha_nominee_relation.errors.required">Nominee Name is required</div>
+    </div>
+    </div>
+   </div>
+
+<div class="col-md-3">  
+    <div class="form-group">
+      <label>Nominee DOB</label>
+       <div class="relative date_pick">
+        <input type="text" class="form-control" name="gha_nominee_dob" id="gha_nominee_dob"   [(ngModel)]="loanForm.gha_nominee_dob" #gha_nominee_dob="ngModel"  required>
+          <!-- <input type="text" class="form-control" name="gha_nominee_dob" id="gha_nominee_dob"   [(ngModel)]="loanForm.gha_nominee_dob" #gha_nominee_dob="ngModel" [ngClass]="{ 'is-invalid': f.submitted && gha_nominee_dob.invalid }" [minDate]="{year: this.min_date-110, month: min_getmonth-4, day: this.min_getday}" [maxDate]="{year: this.max_date-18, month: min_getmonth, day: this.min_getday}" placeholder="mm/dd/yyyy"  readonly="" ngbDatepicker #d="ngbDatepicker" required> -->
+           <!-- <div class="input-group-append">
+            <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
+          </div> -->
+          <div *ngIf="f.submitted && gha_nominee_dob.invalid" class="invalid-feedback">
+              <div *ngIf="gha_nominee_dob.errors.required">Nominee DOB is required</div>
+          </div>
+        </div>
+    </div>
+   </div>
+
+
+ 
+
+ <!--   <div class="col-md-3">  
+    <div class="form-group">
+      <label> Address 1 </label>
+    <input type="text" class="form-control input-sm custom-date-after ng-pristine ng-untouched ng-valid" name="nominee_address1"  value="{{nominee_response.relation}}" [(ngModel)]="loanForm.nominee_address1" #nominee_address1="ngModel" [ngClass]="{ 'is-invalid': f.submitted && nominee_address1.invalid }" required>
+    <div *ngIf="f.submitted && nominee_address1.invalid" class="invalid-feedback">
+        <div *ngIf="nominee_address1.errors.required">Nominee Address1 is required</div>
+    </div>
+    </div>
+   </div> -->
+
+</div>
+<!-- <div class="row lmsresbo">
+   <div class="col-md-3">  
+    <div class="form-group">
+      <label> Address 2</label>
+    <input type="text" class="form-control input-sm custom-date-after ng-pristine ng-untouched ng-valid" name="nominee_address2" [(ngModel)]="loanForm.nominee_address2" #nominee_address2="ngModel" [ngClass]="{ 'is-invalid': f.submitted && nominee_address2.invalid }" required>
+    <div *ngIf="f.submitted && nominee_address2.invalid" class="invalid-feedback">
+        <div *ngIf="nominee_address2.errors.required">Nominee Address2 is required</div>
+    </div>
+    </div>
+   </div>
+   
+</div>
+ -->
+
+    <div id="wrapper">
+       <div><font style="font-size: 19px;color: blue;">Medical Details</font></div>
+       <p></p>
+    <table class="table" id="gha_questions"  border="1">
+    <tbody><tr>
+    <td style="border:1px solid black;background-color: #003399;color: white;" colspan="3"><b>Section A :</b> Have Insured/ Insured person(s) suffered from/are currently suffering from any of the following:</td>
+    <td id="insured1_head" style="border:1px solid black;background-color: #003399;color: white;">Insured Person</td>
+    <td  *ngIf='show_plan_2A' style="border:1px solid black;background-color: #003399;color: white;">Spouse</td>
+    <td   *ngIf='show_plan_2A1C' id="insured3_head" style="border:1px solid black;background-color: #003399;color: white;">Child 1</td>
+    <td  *ngIf='show_plan_2A2C' id="insured4_head" style="border:1px solid black;background-color: #003399;color: white;">Child 2</td>
+    </tr>
+    
+    
+  
+
+    <tr class="gha_questions_id">
+      <td class="gha_questions_id">1</td>
+      <td class="gha_questions_id" colspan="2">Have you suffered from or are you currently suffering from any disease, illness,
+       disability, injury or accident or advised/ consuming medication or undergone/advised/ awaiting any surgical procedu
+        ( other than Normal /assisted Delivery or Caesarean section without any complication) or undergone any investigations,
+         in the past 4 years?</td>
+       
+        <td>NO</td>
+        <td  *ngIf='show_plan_2A'>NO</td>
+        <td  *ngIf='show_plan_2A1C'>NO</td>
+        <td  *ngIf='show_plan_2A2C'>NO</td>
+        
+    </tr>
+    <tr class="gha_questions_id">
+    <td class="gha_questions_id">2</td>
+      <td class="gha_questions_id" colspan="2">
+      Have you ever had or has a doctor ever said that you have any of the  following conditions / diseases -: High or low blood pressure,
+       diabetes or sugar, any heart related ailment, brain stroke, Paralysis, TB or asthma or breathing problem, tumor or cancer, liver or
+        gall bladder diseases, stomach or Duodenal disorder prostrate, intestinal tract disorder,  kidney or stone diseases, arthritis or
+         bone disease, blood diseases or disorders,  Eye or ENT disease, dizziness or fits, HIV/AIDS / any other sexually tansmitted disease, 
+         Ulcer (Stomach / Intestine), Anaemia, Leukaemia or any other blood/lymphatic system disorder, multiple sclerosis, epilepsy, tremors, 
+         paralysis, psychiatric/mental illnesses or sleep disorder, Thyroid/Pituitary disorder / disease or any other endocrine disorder / 
+         disease, Psychiatric/ Mental illnesses or sleep disorder / disease, Heamophilia, cystic fibrosis, down syndrome, sickele cell, 
+         polycystic kidney disease or any other genetic disorder / disease,  Dysfunctional uterine bleeding, Fibroid, Cyst / Fibroadenoma 
+         or any other Gynaecological disorder, or  suffered from any congenital disease, anamolies like congenital Heart disease, cleft palate or 
+       any other disorder / disease.</td>
+     
+         <td>NO</td>
+        <td  *ngIf='show_plan_2A'>NO</td>
+        <td  *ngIf='show_plan_2A1C'>NO</td>
+        <td  *ngIf='show_plan_2A2C'>NO</td>
+
+    </tr>
+    <tr>
+    <td class="gha_questions_id">3</td>
+      <td class="gha_questions_id" colspan="2">Have you or any other member(s) proposed to be insured taken any medication
+       for more than 2 weeks in last 5 years?</td>
+     
+        <td>NO</td>
+        <td  *ngIf='show_plan_2A'>NO</td>
+        <td  *ngIf='show_plan_2A1C'>NO</td>
+        <td  *ngIf='show_plan_2A2C'>NO</td>
+    </tr>
+    <tr>
+    <td class="gha_questions_id">4</td>
+      <td class="gha_questions_id" colspan="2">Has any application for life, Health or critical illness
+       insurance ever been declined, postponed, loaded or been made subject to any special conditions
+        by any insurance company?</td>
+       
+        <td>NO</td>
+        <td  *ngIf='show_plan_2A'>NO</td>
+        <td  *ngIf='show_plan_2A1C'>NO</td>
+        <td  *ngIf='show_plan_2A2C'>NO</td>
+    </tr>
+    <tr>
+    <td class="gha_questions_id">5</td>
+      <td class="gha_questions_id" colspan="2">Please confirm, if any of the person to be insured is pregnant? If yes, please answer as below:- 
+      <br><br>
+      a) Duration in weeks <br>
+      b) Expected delivery date<br> 
+      c) Any complications during previous pregnancy?
+       </td>
+       
+       
+        <td>NO</td>
+       <td  *ngIf='show_plan_2A'>NO</td>
+        <td  *ngIf='show_plan_2A1C'>NO</td>
+        <td  *ngIf='show_plan_2A2C'>NO</td>
+     </tr>
+  </tbody></table>
+   </div>
+
+  <hr class="new1">
+        <div class="row">
+
+
+            <div class="col-md-12">
+                     <div class="form-group">
+                           <input type="checkbox" name="gha_cus_declaration" id="gha_cus_declaration1"  (click)="checkboxDeclaration1($event)"  value="0" required="" class="ng-pristine ng-untouched ng-invalid ng-invalid-required">
+                          <span class="required"> * </span> <label> I confirm that all the proposal details displayed above/below is correct.</label>
+                           <div class="error_text" *ngIf="declaration1">Please Accept Decleration</div>
+                        </div>
+                     </div>
+       
+
+                       <div class="col-md-12">
+                     <div class="form-group"> 
+                           <input type="checkbox" name="gha_cus_declaratio2"  (click)="checkboxDeclaration2($event)" id="gha_cus_declaration2"  value="0" required="" class="ng-pristine ng-untouched ng-invalid ng-invalid-required">
+                           <span class="required"> * </span>
+                           <label> I confirm that I have read and understood the <a (click)="openInsurance()" >General Insurance Declaration</a>, <a (click)="privacyPolicy()">Privacy policy</a> and <a (click)="terms()">Terms and condition</a></label>
+                           <div class="error_text" *ngIf="declaration2">Please Accept Decleration</div>
+                        </div>
+                     </div>
+                   </div>
+
+              <!--  <div class="row">
+                <div class="col-md-12">
+                     <div class="form-group">
+                          <h4 style="color: #3598dc;">RM Declaration</h4>
+                        </div>
+                     </div> 
+
+                     <div class="col-md-12">
+                     <div class="form-group">
+                           <input type="checkbox" name="gha_hdfc_emp_declaration2" id="gha_hdfc_emp_declaration2" value="0" class="ng-pristine ng-untouched ng-invalid ng-invalid-required" (click)="checkboxClick1($event)">
+                          <span class="required"> *</span>I hereby confirm and declare that policy holder/payer have relationship with LoanTap Financial Technologies.
+                    <div class="error_text" *ngIf="!checkbox1">Please Accept Decleration</div>
+                        </div>
+                     </div>
+                     <div class="col-md-12">
+                     <div class="form-group">
+                           <input type="checkbox" name="gha_hdfc_emp_declaration3" (click)="checkboxClick2($event)" id="gha_hdfc_emp_declaration3" ng-model="gha_hdfc_emp_declaration3" value="0" required="" class="ng-pristine ng-untouched ng-invalid ng-invalid-required">
+                          <span class="required"> *</span>I hereby confirm and declare that information(Email ID, Mobile Number and other details) given in the proposal form is as per Loantap records.
+                           <div class="error_text" *ngIf="!checkbox2">Please Accept Decleration</div>
+                        </div>
+                      </div>
+                  
+                     <div class="col-md-12">
+                     <div class="form-group">
+                           <input type="checkbox" name="gha_hdfc_emp_declaration4" (click)="checkboxClick3($event)" id="gha_hdfc_emp_declaration4" ng-model="gha_hdfc_emp_declaration4" value="0" required="" class="ng-pristine ng-untouched ng-invalid ng-invalid-required">
+                           <span class="required"> *</span>I hereby confirm and declare that policy holder &amp; payer (If they are different) have blood relationship with each other.
+                           <div class="error_text" *ngIf="!checkbox3">Please Accept Decleration</div>
+                        </div>
+                     </div>
+
+                     <div class="col-md-12">
+                     <div class="form-group">
+                           <input type="checkbox" name="gha_hdfc_emp_declaration5" (click)="checkboxClick4($event)" id="gha_hdfc_emp_declaration5" ng-model="gha_hdfc_emp_declaration5" value="0" required="" class="ng-pristine ng-untouched ng-invalid ng-invalid-required">
+                           <span class="required"> *</span>I hereby confirm and declare that any incorrect information/declaration given in the Sales Journey/Proposal form etc will call for action as per Loantap policy. 
+                           <div class="error_text" *ngIf="!checkbox4">Please Accept Decleration</div>
+                        </div>
+                     </div>
+
+        
+                </div>  -->
+
+                      <!-- ngIf: submitOtppage == false --><div *ngIf=" submitOtppage == false" class="ng-scope">
+                        <div class="col-md-12 text-right"><button class="btn btn-primary" style="display: none" id="otpMessagewait" type="button">Please wait..</button></div>
+                        <div class="col-md-12 text-right"><button class="btn btn-primary" id="sendotp" (click)="sendOPT()" type="submit">Send OTP</button></div>
+                      </div><!-- end ngIf: submitOtppage == false -->
+                      <div id="error-otp-fail" style="color:red;"></div>
+
+              <div *ngIf="submitOtppage" class="ng-scope col-md-12">
+                   <div class="row">
+                    <fieldset class="form-group">
+                    <label for="basicInput"><strong class="labelcss headdercss">Please Enter OTP</strong></label>
+                    <input type="number" class="form-control ng-pristine ng-untouched ng-invalid ng-invalid-required ng-valid-maxlength" maxlength="6" id="enteredotp" name="enteredotp" placeholder="OTP" ng-model="enteredotp" autocomplete="none" required="">
+                    <!-- ngIf: gha_customer_otp_submit.$submitted || gha_customer_otp_submit.enteredotp.$dirty -->
+                      <div id="message-text-error"></div>
+                   </fieldset>
+                    </div>
+                   <div>
+                    <div class="col-md-12 text-right"><button class="btn btn-primary" style="display: none" id="otpVerifyPlease" type="button">Please wait..</button></div>
+                    <div class="col-md-12 text-right"><button class="btn btn-primary" id="submitotp" (click)="onSubmit()" type="submit">OTP Submit</button></div>
+                  </div>
+               </div>
+             </form>       
+
+</div>

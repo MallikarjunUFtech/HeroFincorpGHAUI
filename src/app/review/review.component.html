@@ -1,0 +1,117 @@
+﻿<form name="form1" (ngSubmit)="onSubmit()" #f="ngForm"  novalidate>
+
+<div class="container review_page">
+<!--   <div class="review_bg"></div>
+ -->  <h2 class="text-center review_main_hdr">Review and Confirm Page</h2>
+  <div class="review_hdr col-md-12 data_field">
+  
+      <div class="col-md-4  ">
+      <p>Personal Information</p>
+      <div class="col-md-12 width100">
+        <div class="col-md-4">First Name</div>
+        <div class="col-md-1">:</div>
+        <div class="col-md-7">{{ reviewdata.obj2.firstName }}</div>
+      </div>
+      <div class="col-md-12">
+       <div class="col-md-4">Last Name</div>
+      <div class="col-md-1">:</div>
+      <div class="col-md-7">{{ reviewdata.obj2.lastName }}</div>
+    </div>
+    <div class="col-md-12">
+           <div class="col-md-4">Email ID</div>
+          <div class="col-md-1">:</div>
+          <div class="col-md-7">{{ reviewdata.obj2.email }}</div>
+        </div>
+    <div class="col-md-12">
+           <div class="col-md-4">Mobile Number</div>
+          <div class="col-md-1">:</div>
+          <div class="col-md-7">{{ reviewdata.obj2.mobile }}</div>
+        </div>
+    <div class="col-md-12">
+           <div class="col-md-4">Address1</div>
+          <div class="col-md-1">:</div>
+          <div class="col-md-7">{{ reviewdata.obj1.address1 }}</div>
+        </div>
+    <div class="col-md-12">
+           <div class="col-md-4">Address2</div>
+          <div class="col-md-1">:</div>
+          <div class="col-md-7">{{ reviewdata.obj1.address2 }}</div>
+        </div>
+    <div class="col-md-12">
+           <div class="col-md-4">Address3</div>
+          <div class="col-md-1">:</div>
+          <div class="col-md-7">{{ reviewdata.obj1.address3 }}</div>
+        </div>
+    <div class="col-md-12">
+           <div class="col-md-4">State</div>
+          <div class="col-md-1">:</div>
+          <div class="col-md-7">{{ reviewdata.obj1.state }}</div>
+        </div>
+    <div class="col-md-12">
+           <div class="col-md-4">City</div>
+          <div class="col-md-1">:</div>
+          <div class="col-md-7">{{ reviewdata.obj1.city }}</div>
+        </div>
+    <div class="col-md-12">
+           <div class="col-md-4">Pincode</div>
+          <div class="col-md-1">:</div>
+          <div class="col-md-7">{{ reviewdata.obj1.pincode }}</div>
+    </div>
+
+    </div>
+    <div class="col-md-4">
+      <p>Policy Information</p>
+      <div class="col-md-12 width100">
+        <div class="col-md-4">Type of Policy</div>
+        <div class="col-md-1">:</div>
+        <div class="col-md-7">{{ reviewdata.obj2.family }}</div>
+      </div>
+      <div class="col-md-12">
+       <div class="col-md-4">Policy Start Date</div>
+      <div class="col-md-1">:</div>
+      <div class="col-md-7">{{ reviewdata.obj1.policy_start }}</div>
+    </div>
+    <div class="col-md-12">
+           <div class="col-md-4">Policy End Date</div>
+          <div class="col-md-1">:</div>
+          <div class="col-md-7">{{ reviewdata.obj1.policy_end }}</div>
+        </div>
+    <div class="col-md-12">
+           <div class="col-md-4">Sum Insured</div>
+          <div class="col-md-1">:</div>
+          <div class="col-md-7">{{ reviewdata.obj2.sumAssured }}</div>
+        </div>
+    <div class="col-md-12">
+           <div class="col-md-4">Deductiable</div>
+          <div class="col-md-1">:</div>
+          <div class="col-md-7">{{ reviewdata.obj2.premium }}</div>
+        </div>
+    
+    </div>
+    <div class="col-md-4">
+      <p>Premium Information</p>
+      <div class="col-md-12">
+           <div class="col-md-4">Premium Before Tax</div>
+          <div class="col-md-1">:</div>
+          <div class="col-md-7">{{ reviewdata.obj2.premium }}</div>
+        </div>
+    <div class="col-md-12">
+           <div class="col-md-4">GST</div>
+          <div class="col-md-1">:</div>
+          <div class="col-md-7">{{ reviewdata.obj2.tax }}</div>
+        </div>
+    <div class="col-md-12">
+           <div class="col-md-4">Payable Premium</div>
+          <div class="col-md-1">:</div>
+          <div class="col-md-7">{{ reviewdata.obj2.totalpremium }}</div>
+        </div>
+    </div>
+  </div>
+  <div class="col-md-12 pull-right payment_btns text-right">
+    <button class="btn blue" >Back</button>
+    <button class="btn blue"  type="submit" [disabled]="enablePayment">Proceed For Payment</button>
+  <div>
+</div>
+</div>
+</div>
+</form>

@@ -1,0 +1,517 @@
+﻿<form [formGroup]="proposalForm" (ngSubmit)="onSubmit()">
+
+  <div class="container">
+  <h3 style="color: #003399;font-size: 26px;font-weight: bold;">Fill Your Details</h3><br>
+
+<div>
+  <h4 style="color: #3598dc;">Proposal Details </h4>
+</div>
+  <hr>
+
+
+            <div class="row">
+            
+               <div class="col-md-3">
+                  <div class="form-group">
+                     <label for="address1">Address 1
+                     <span class="required"> * </span></label>  
+                     <input type="text" name="address1" id="address1" maxlength="30" formControlName="address1" [ngClass]="{ 'is-invalid': submitted && f.address1.errors }"  class="form-control input-sm rounded ng-pristine ng-untouched ng-invalid ng-invalid-required ng-valid-maxlength" placeholder="Address 1" value="" autocomplete="none" >               
+                    <div *ngIf="submitted && f.address1.invalid" class="invalid-feedback">
+	                  <div *ngIf="f.address1.errors.required">Please Enter Address</div>
+		            </div>
+                  </div>
+               </div>
+
+               <div class="col-md-3">
+                  <div class="form-group">
+                     <label>Address 2</label>  
+                     <input type="text" name="gha_address2" id="gha_address2" maxlength="30" value="" formControlName="address2"  class="form-control rounded input-sm ng-pristine ng-untouched ng-invalid ng-invalid-required ng-valid-maxlength" placeholder="Address 2" value="" autocomplete="none" >               
+                     
+                  </div>
+               </div>
+
+               <div class="col-md-3">
+                  <div class="form-group">
+                     <label>Address 3
+                     </label>  
+                     <input type="text" name="gha_address3" id="gha_address3" maxlength="30" ng-model="gha_address3" value="" formControlName="address3"  class="form-control rounded input-sm ng-pristine ng-untouched ng-valid ng-valid-maxlength" placeholder="Address 3" value="" autocomplete="none">               
+                    <!-- <div ng-if="gha_enrollment_proposal.$submitted || gha_enrollment_proposal.gha_address3.$dirty" ng-messages="gha_enrollment_proposal.gha_address3.$error" role="alert">
+                        <div ng-message="required" class="required">Please Enter Address</div>
+                     </div> -->
+                  </div>
+               </div>
+
+               <div class="col-md-3">
+                  <div class="form-group">
+                     <label>Pincode
+                     <span class="required"> * </span></label>  
+                     <input type="text" name="gha_pincode" value="" id="gha_pincode" formControlName="pincode" [ngClass]="{ 'is-invalid': submitted && f.pincode.errors }" maxlength="20" class="form-control rounded input-sm ng-pristine ng-untouched ng-valid ng-valid-maxlength" placeholder="Pincode" (keypress)="restrictAlphabets($event)" (keyup)="pincodeValidator($event)" autocomplete="none" >  
+                     <div id="pincode-error" class="invalid-feedback">Please Enter a Valid Pincode</div>             
+                     <div *ngIf="submitted && f.pincode.invalid" class="invalid-feedback">
+		                <div *ngIf="f.pincode.errors.required">Please Enter a Valid Pincode</div>
+		            </div>
+                  </div>
+               </div>
+
+               <div class="col-md-3">
+                  <div class="form-group">
+                     <label>City
+                     <span class="required"> * </span></label>  
+                     <input type="text" name="gha_city" id="gha_city" maxlength="30" formControlName="city"  [ngClass]="{ 'is-invalid': submitted && f.city.errors }"  class="form-control input-sm rounded ng-pristine ng-untouched ng-invalid ng-invalid-required ng-valid-maxlength" placeholder="City" value="" autocomplete="none" >               
+                     <div *ngIf="submitted && f.city.invalid" class="invalid-feedback">
+		                <div *ngIf="f.city.errors.required">Please Enter City</div>
+		            </div>
+                  </div>
+               </div>
+
+              
+
+
+               <div class="col-md-3">
+                  <div class="form-group">
+                     <label>State
+                     <span class="required"> * </span></label>  
+                     <input type="text" name="gha_state" id="gha_state" formControlName="state"  [ngClass]="{ 'is-invalid': submitted && f.state.errors }" class="form-control rounded input-sm ng-pristine ng-untouched ng-valid" placeholder="State" value="" autocomplete="none" >
+                     <div *ngIf="submitted && f.state.invalid" class="invalid-feedback">
+		                <div *ngIf="f.state.errors.required">Please Enter State</div>
+		            </div>
+                  </div>
+               </div>
+
+               <div class="col-md-3">
+				    <div class="form-group">
+				        <label>Policy start date  <span class="required"> * </span></label>
+                 <div class="relative date_pick">
+                    <input type="text"  formControlName="policy_start"  id="gha_policy_start_date" (ngModelChange)="changeDate($event)"  [minDate]="{year: this.get_year, month: get_month, day: this.get_day}" [maxDate]="{year: this.get_year, month: get_month+2, day: this.get_day}" placeholder="mm/dd/yyyy"  readonly="" ngbDatepicker #d1="ngbDatepicker" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.policy_start.errors }" />
+                    <div class="input-group-append">
+                    <button class="btn btn-outline-secondary calendar" (click)="d1.toggle()" type="button"></button>
+                  </div>
+                   <div *ngIf="submitted && f.policy_start.invalid" class="invalid-feedback">
+                    <div *ngIf="f.policy_start.errors.required">Policy start date is required</div>
+                </div>
+                </div>
+               
+				       <!--  <input type="text" name="gha_policy_start_date" id="gha_policy_start_date"  [ngClass]="{ 'is-invalid': submitted && f.policy_start.errors }" formControlName="policy_start" value="" class="form-control input-sm rounded policy-start-date" placeholder="DD-MM-YYYY" > -->
+				        
+				    </div>
+				</div>
+
+				<div class="col-md-3">  
+                  <div class="form-group">
+                     <label>Policy end date</label>
+                     <div class="relative date_pick">
+                    <input type="text" maxlength="30" formControlName="policy_end" id="gha_policy_end_date" [value]="this.policy_end_date" placeholder="mm/dd/yyyy"  readonly="" ngbDatepicker  class="form-control"  />
+                    
+                </div>
+                    <!--  <input type="text" id="gha_policy_end_date" name="gha_policy_end_date" formControlName="policy_end" class="form-control input-sm rounded custom-date-after" placeholder="DD-MM-YYYY"  data-date-format="dd-mm-yyyy" value="" readonly=""> -->
+                      <!-- <div *ngIf="submitted && f.policy_end.invalid" class="invalid-feedback">
+                    <div *ngIf="f.policy_end.errors.required">required</div>
+                </div> -->
+                      </div>
+               </div>
+               
+
+               <div class="col-md-3">
+                  <div class="form-group">
+                     <label>Pan Card</label>  
+                     <input  type="text" name="gha_pancard"   id="gha_pancard"  ng-model="gha_pancard" formControlName="pan_card"   class="form-control rounded input-sm"  placeholder="Pancard" value="" autocomplete="none" />               
+                    
+                  </div>
+               </div>
+
+               <div class="form-group" style="display: none" ng-init=" include_sp = &quot;1&quot; ">
+                 <input type="text" id="include_sp" name="include_sp" ng-model="include_sp" class="ng-pristine ng-untouched ng-valid" >
+                </div>
+                <div class="form-group" style="display: none" ng-init=" include_ch = &quot;0&quot; ">
+                  <input type="text" id="include_ch" name="include_ch" ng-model="include_ch" class="ng-pristine ng-untouched ng-valid"> 
+                </div>
+                 <div class="form-group" style="display: none" ng-init=" gha_policy_date = &quot;11-06-2020&quot; ">
+                  <input type="text" id="gha_policy_date" name="gha_policy_date" ng-model="gha_policy_date" class="ng-pristine ng-untouched ng-valid"> 
+                </div>
+                <div class="form-group" style="display: none" ng-init=" gha_pre_val = &quot;&quot; ">
+                  <input type="text" id="gha_pre_val" name="gha_pre_val" ng-model="gha_pre_val" class="ng-pristine ng-untouched ng-valid"> 
+                </div>
+		            <div class="form-group" style="display: none">
+                  <input type="text" id="questionarycheckbok" name="questionarycheckbok" ng-model="questionarycheckbok" value="0" class="ng-pristine ng-untouched ng-valid"> 
+                </div>
+
+</div>
+</div>
+            <div class="container">
+              <div>
+                         </div><div>
+                       </div><div>
+                       </div><table class="table table-bordered css-serial ">
+                  <thead>
+                        <tr style="background-color: #003399;color: white;">
+                          <th>S.No</th>
+                          <th>Name_Of_The_Member</th>
+                          <th>Relationship_With_The_Proposer</th>
+                          <th>Date_Of_Birth</th>
+                          <th>Select_Gender</th>
+                          <th>Height(in_cm)</th>
+                          <th>Weight(in_kg)</th>
+                        </tr>
+                  </thead>
+                  <tbody>
+                       <tr>
+                          <td>1</td>
+                          <td>Hau Hai</td>
+                          <td>Self</td>
+                          <td>12/1/2015</td>
+                          <td>Male</td>
+                          <td>
+			                  <div class="form-group">  
+			                     <input type="text"  (keypress)="restrictAlphabets($event)"  [ngClass]="{ 'is-invalid': submitted && f.self_height.errors }" formControlName="self_height" name="self_height" id="gha_self_height" class="form-control rounded input-sm ng-pristine ng-untouched ng-valid" maxlength="3" placeholder="Self Height" value="" autocomplete="none" >
+			                     <div *ngIf="submitted && f.self_height.invalid" class="invalid-feedback">
+					                <div *ngIf="f.self_height.errors.required">Please Enter Height</div>
+					            </div>
+			                  </div>
+
+                         </td>
+                         <td>  
+                        	 <div class="form-group">  
+			                     <input type="text"  (keypress)="restrictAlphabets($event)" formControlName="self_weight"  [ngClass]="{ 'is-invalid': submitted && f.self_weight.errors }"   name="self_weight" id="gha_self_weight" class="form-control rounded input-sm ng-pristine ng-untouched ng-valid" maxlength="3" placeholder="Self Height" value="" autocomplete="none" >
+			                     <div *ngIf="submitted && f.self_weight.invalid" class="invalid-feedback">
+					                <div *ngIf="f.self_weight.errors.required">Please Enter Weight</div>
+					            </div>
+			                  </div> 
+                          </td>
+                       </tr>
+
+                       <tr *ngIf='show_plan_2A'>
+                           <td>2</td>
+                           <td>   
+                           	<div class="form-group">  
+			                     <input type="text"    name="gha_spouse_name" formControlName="gha_spouse_name"  [ngClass]="{ 'is-invalid': submitted && f.gha_spouse_name.errors }" id="gha_spouse_name" class="form-control rounded input-sm ng-pristine ng-untouched ng-valid" maxlength="30" placeholder="Spouse Name" value="" autocomplete="none" >
+			                     <div *ngIf="submitted && f.gha_spouse_name.invalid" class="invalid-feedback">
+					                <div *ngIf="f.gha_spouse_name.errors.required">Please Spouse Name</div>
+					            </div>
+			                  </div> 
+                          </td>
+
+                           <td>
+                              <div class="form-group">
+                              <select id="gha_spouse_relation" name="gha_spouse_relation" autocomplete="none"  [ngClass]="{ 'is-invalid': submitted && f.gha_spouse_relation.errors }" formControlName="gha_spouse_relation" class="form-control rounded input-sm ng-pristine ng-untouched ng-invalid ng-invalid-required">
+                                    <option value="" disabled="" selected="">Select your option</option>
+                                    <option value="spouse">Spouse</option>
+                                    </select> 
+                                <div *ngIf="submitted && f.gha_spouse_relation.invalid" class="invalid-feedback">
+					                <div *ngIf="f.gha_spouse_relation.errors.required">Please Spouse Name</div>
+					            </div>
+                              </div>           
+                          </td>
+
+                            <td>
+                              <div class="form-group">
+
+                                <div class="relative date_pick">
+                                  <input type="text" maxlength="30" formControlName="gha_spouse_dob" id="gha_spouse_dob" [minDate]="{year: this.min_date-110, month: min_getmonth-4, day: this.min_getday}" [maxDate]="{year: this.max_date-18, month: min_getmonth, day: this.min_getday}" placeholder="mm/dd/yyyy"  readonly="" ngbDatepicker #spouse="ngbDatepicker" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.gha_spouse_dob.errors }" />
+                                  <div class="input-group-append">
+                                  <button class="btn btn-outline-secondary calendar" (click)="spouse.toggle()" type="button"></button>
+                                </div>
+                                  <div *ngIf="submitted && f.gha_spouse_dob.invalid" class="invalid-feedback">
+                                    <div *ngIf="f.gha_spouse_dob.errors.required">Please select Spouse DOB</div>
+                                </div>
+                              </div>
+
+                              <!-- <input type="text" id="gha_spouse_dob" name="gha_spouse_dob" [ngClass]="{ 'is-invalid': submitted && f.gha_spouse_dob.errors }" formControlName="gha_spouse_dob" autocomplete="none" class="form-control rounded input-sm custom-date-dob ng-pristine ng-untouched ng-valid ng-valid-required" placeholder="DD-MM-YYYY" value=""> -->
+                               
+                             </div></td>
+
+                           <td>
+                              <div class="form-group">
+                              <select id="gha_spouse_gender" name="gha_spouse_gender" autocomplete="none" formControlName="gha_spouse_gender"  [ngClass]="{ 'is-invalid': submitted && f.gha_spouse_gender.errors }" class="form-control rounded input-sm ng-pristine ng-untouched ng-invalid ng-invalid-required" >
+                                    <option value="" disabled="" selected="">Select your option</option>
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                    <option value="Others">Others</option>
+                                    </select> 
+                                <div *ngIf="submitted && f.gha_spouse_gender.invalid" class="invalid-feedback">
+					                <div *ngIf="f.gha_spouse_gender.errors.required">Please Select Gender</div>
+					            </div>
+                              </div>           
+                          </td>
+
+                          <td>   
+                              <div class="form-group">
+                              <input type="text" id="gha_spouse_height" name="gha_spouse_height" autocomplete="none" [ngClass]="{ 'is-invalid': submitted && f.gha_spouse_height.errors }"  formControlName="gha_spouse_height" class="form-control rounded input-sm ng-pristine ng-untouched ng-invalid ng-invalid-required ng-valid-maxlength" placeholder="Spouse Height" (keypress)="restrictAlphabets($event)"> 
+                             <div *ngIf="submitted && f.gha_spouse_height.invalid" class="invalid-feedback">
+					                <div *ngIf="f.gha_spouse_height.errors.required">Please Enter Height</div>
+					            </div>
+                             </div>
+                          </td>
+                           <td>   
+                            <div class="form-group">
+                             <input type="text" id="gha_spouse_weight" name="gha_spouse_weight" autocomplete="none"  formControlName="gha_spouse_weight" [ngClass]="{ 'is-invalid': submitted && f.gha_spouse_weight.errors }" class="form-control rounded input-sm ng-pristine ng-untouched ng-invalid ng-invalid-required ng-valid-maxlength" placeholder="Spouse Weight" (keypress)="restrictAlphabets($event)" > 
+                             <div *ngIf="submitted && f.gha_spouse_weight.invalid" class="invalid-feedback">
+					                <div *ngIf="f.gha_spouse_weight.errors.required">Please Enter Weight</div>
+					            </div>
+                             </div>
+                          </td>
+                       </tr>
+                     
+
+                     <tr  *ngIf='show_plan_2A1C'>
+                           <td>3</td>
+                           <td>   
+                            <div class="form-group">
+                             <input type="text" id="gha_child1_name" name="gha_child1_name" autocomplete="none"  formControlName="gha_child1_name" [ngClass]="{ 'is-invalid': submitted && f.gha_child1_name.errors }" class="form-control rounded input-sm namerestrict ng-pristine ng-untouched ng-valid ng-valid-required" placeholder="Child1 Name">
+			                     <div *ngIf="submitted && f.gha_child1_name.invalid" class="invalid-feedback">
+					                <div *ngIf="f.gha_child1_name.errors.required">Please Enter Child1 Name</div>
+					            </div>
+                             </div>
+                          </td>
+
+                           <td>
+                              <div class="form-group">
+                              <select id="gha_child1_relation" name="gha_child1_relation" autocomplete="none"  [ngClass]="{ 'is-invalid': submitted && f.gha_child1_relation.errors }" formControlName="gha_child1_relation" class="form-control rounded input-sm ng-pristine ng-untouched ng-valid ng-valid-required">
+                                    <option value="" disabled="" selected="">Select your option</option>
+                                       <option value="child">Child</option>
+                                    </select> 
+                                 <div *ngIf="submitted && f.gha_child1_relation.invalid" class="invalid-feedback">
+					                <div *ngIf="f.gha_child1_relation.errors.required">Please select Child1 Relation</div>
+					            </div>
+                              </div>           
+                          </td>
+
+                           <td>
+                              <div class="form-group">
+                                <div class="relative date_pick">
+                                  <input type="text" maxlength="30" formControlName="gha_child1_dob" id="gha_child1_dob" name="gha_child1_dob" [minDate]="{year: this.min_date-110, month: min_getmonth-4, day: this.min_getday}" [maxDate]="{year: this.max_date-18, month: min_getmonth, day: this.min_getday}" placeholder="mm/dd/yyyy"  readonly="" ngbDatepicker #child1="ngbDatepicker" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.gha_child1_dob.errors }" />
+                                  <div class="input-group-append">
+                                  <button class="btn btn-outline-secondary calendar" (click)="child1.toggle()" type="button"></button>
+                                </div>
+                                  <div *ngIf="submitted && f.gha_child1_dob.invalid" class="invalid-feedback">
+                                    <div *ngIf="f.gha_child1_dob.errors.required">Please select Child1 DOB</div>
+                                </div>
+                              </div>
+                              <!-- <input type="text" id="gha_child1_dob" name="gha_child1_dob" [ngClass]="{ 'is-invalid': submitted && f.gha_child1_dob.errors }" formControlName="gha_child1_dob" autocomplete="none" class="form-control rounded input-sm custom-date-dob ng-pristine ng-untouched ng-valid ng-valid-required" placeholder="DD-MM-YYYY" value="">
+                               <div *ngIf="submitted && f.gha_child1_dob.invalid" class="invalid-feedback">
+					                <div *ngIf="f.gha_child1_dob.errors.required">Please select Child1 DOB</div>
+					            </div> -->
+                             </div>
+                          </td>
+
+                           <td>
+                              <div class="form-group">
+                              <select id="gha_child1_gender" name="gha_child1_gender" autocomplete="none" formControlName="gha_child1_gender" [ngClass]="{ 'is-invalid': submitted && f.gha_child1_gender.errors }"  class="form-control rounded input-sm ng-pristine ng-untouched ng-valid ng-valid-required" >
+                                    <option value="" disabled="" selected="">Select your option</option>
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                    <option value="Others">Others</option>
+                                    </select> 
+                                <div *ngIf="submitted && f.gha_child1_gender.invalid" class="invalid-feedback">
+					                <div *ngIf="f.gha_child1_gender.errors.required">Please Select Child1 Gender</div>
+					            </div>
+                              </div>           
+                          </td>
+
+
+                           <td>   
+                              <div class="form-group">
+                              <input type="text" id="gha_child1_height" name="gha_child1_height" autocomplete="none" [ngClass]="{ 'is-invalid': submitted && f.gha_child1_height.errors }" formControlName="gha_child1_height" class="form-control rounded input-sm ng-pristine ng-untouched ng-valid ng-valid-maxlength ng-valid-required" placeholder="Child1 Height" (keypress)="restrictAlphabets($event)" ng-model="gha_child1_height" maxlength="3" > 
+                              <div *ngIf="submitted && f.gha_child1_height.invalid" class="invalid-feedback">
+					                <div *ngIf="f.gha_child1_height.errors.required">Please Enter Child1 Height</div>
+					            </div>
+                             </div>
+                          </td>
+                           <td>   
+                            <div class="form-group">
+                             <input type="text" id="gha_child1_weight" name="gha_child1_weight" autocomplete="none"  [ngClass]="{ 'is-invalid': submitted && f.gha_child1_weight.errors }" formControlName="gha_child1_weight" class="form-control rounded input-sm ng-pristine ng-untouched ng-valid ng-valid-maxlength ng-valid-required" placeholder="Child1 Weight" (keypress)="restrictAlphabets($event)" > 
+                              <div *ngIf="submitted && f.gha_child1_weight.invalid" class="invalid-feedback">
+					                <div *ngIf="f.gha_child1_weight.errors.required">Please Enter Child1 Weight</div>
+					            </div>
+                             </div>
+                          </td>
+                       </tr>
+                     
+
+
+                     <tr  *ngIf='show_plan_2A2C'>
+                           <td>4</td>
+                           <td>   
+                            <div class="form-group">
+                             <input type="text" id="gha_child2_name" name="gha_child2_name" autocomplete="none" [ngClass]="{ 'is-invalid': submitted && f.gha_child2_name.errors }" formControlName="gha_child2_name" class="form-control rounded input-sm namerestrict ng-pristine ng-untouched ng-valid ng-valid-required" placeholder="Child2 Name" >
+			                     <div *ngIf="submitted && f.gha_child2_name.invalid" class="invalid-feedback">
+					                <div *ngIf="f.gha_child2_name.errors.required">Please Enter Child2 Name</div>
+					            </div>
+                             </div>
+                          </td>
+
+                           <td>
+                              <div class="form-group">
+                              <select id="gha_child2_relation" name="gha_child2_relation" autocomplete="none" [ngClass]="{ 'is-invalid': submitted && f.gha_child2_relation.errors }"  formControlName="gha_child2_relation" class="form-control rounded input-sm ng-pristine ng-untouched ng-valid ng-valid-required" >
+                                    <option value="" disabled="" selected="">Select your option</option>
+                                       <option value="child">Child</option>
+                                    </select> 
+                                 <div *ngIf="submitted && f.gha_child2_relation.invalid" class="invalid-feedback">
+					                <div *ngIf="f.gha_child2_relation.errors.required">Please select Child2 Relation</div>
+					            </div>
+					        </div>
+                          </td>
+
+                    
+                          <td>
+                              <div class="form-group">
+                                 <div class="relative date_pick">
+                                  <input type="text" maxlength="30" formControlName="gha_child2_dob" id="gha_child2_date" name="gha_child2_dob" [minDate]="{year: this.min_date-110, month: min_getmonth-4, day: this.min_getday}" [maxDate]="{year: this.max_date-18, month: min_getmonth, day: this.min_getday}" placeholder="mm/dd/yyyy"  readonly="" ngbDatepicker #child2="ngbDatepicker" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.gha_child2_dob.errors }" />
+                                  <div class="input-group-append">
+                                  <button class="btn btn-outline-secondary calendar" (click)="child2.toggle()" type="button"></button>
+                                </div>
+                                  <div *ngIf="submitted && f.gha_child2_dob.invalid" class="invalid-feedback">
+                                    <div *ngIf="f.gha_child2_dob.errors.required">Please select Child2 DOB</div>
+                                </div>
+                              </div>
+                              <!-- <input type="text" id="gha_child2_dob" name="gha_child2_dob"  [ngClass]="{ 'is-invalid': submitted && f.gha_child2_dob.errors }" formControlName="gha_child2_dob"  autocomplete="none" class="form-control rounded input-sm custom-date-dob ng-pristine ng-untouched ng-valid ng-valid-required" placeholder="DD-MM-YYYY" >
+                              <div *ngIf="submitted && f.gha_child2_dob.invalid" class="invalid-feedback">
+					                <div *ngIf="f.gha_child2_dob.errors.required">Please select Child2 DOB</div>
+					            </div> -->
+                             </div>
+                          </td>
+
+                           <td>
+                              <div class="form-group">
+                              <select id="gha_child2_gender" name="gha_child2_gender" autocomplete="none" formControlName="gha_child2_gender"  [ngClass]="{ 'is-invalid': submitted && f.gha_child2_gender.errors }"  class="form-control rounded input-sm ng-pristine ng-untouched ng-valid ng-valid-required">
+                                    <option value="" disabled="" selected="">Select your option</option>
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                    <option value="Others">Others</option>
+                                    </select> 
+                                <div *ngIf="submitted && f.gha_child2_gender.invalid" class="invalid-feedback">
+					                <div *ngIf="f.gha_child2_gender.errors.required">Please Select Child1 Gender</div>
+					            </div>
+                              </div>           
+                          </td>
+
+                           <td>   
+                              <div class="form-group">
+                              <input type="text" id="gha_child2_height" name="gha_child2_height" formControlName="gha_child2_height"  [ngClass]="{ 'is-invalid': submitted && f.gha_child2_height.errors }"  autocomplete="none" class="form-control rounded input-sm ng-pristine ng-untouched ng-valid ng-valid-maxlength ng-valid-required" placeholder="Child2 Height" (keypress)="restrictAlphabets($event)" > 
+                              <div *ngIf="submitted && f.gha_child2_height.invalid" class="invalid-feedback">
+					                <div *ngIf="f.gha_child2_height.errors.required">Please Enter Child2 Height</div>
+					            </div>
+                             </div>
+                          </td>
+
+                           <td>   
+                            <div class="form-group">
+                             <input type="text" id="gha_child2_weight" name="gha_child2_weight" autocomplete="none"   [ngClass]="{ 'is-invalid': submitted && f.gha_child2_weight.errors }" formControlName="gha_child2_weight" class="form-control rounded input-sm ng-pristine ng-untouched ng-valid ng-valid-maxlength ng-valid-required" placeholder="Child2 Weight" (keypress)="restrictAlphabets($event)"> 
+                              <div *ngIf="submitted && f.gha_child2_weight.invalid" class="invalid-feedback">
+					                <div *ngIf="f.gha_child2_weight.errors.required">Please Enter Child2 Weight</div>
+					            </div>
+                             </div>
+                          </td>
+                       </tr>
+                     
+                  </tbody>
+            </table>
+            </div>
+
+
+
+           <div class="container">
+            <h4 style="color: #3598dc;">Nominee Details </h4><hr>
+              <p>“In the event of the death of an Insured Person any payment due under the Policy shall become payable to the nominee in accordance with the Policy terms and conditions. The nominee must be an immediate relative of the Proposer. Nominee for any of the persons proposed to be insured shall be the Proposer”.
+            </p> <br>
+
+              <div class="row">
+                        <div class="col-md-3">
+                              <div class="form-group">
+                                 <label>Name of the Nominee
+                                 <span class="required"> * </span></label>
+                                 <input type="text" name="gha_nominee" placeholder="Enter Name of Nominee"  [ngClass]="{ 'is-invalid': submitted && f.gha_nominee.errors }"  formControlName="gha_nominee" class="form-control rounded input-sm namerestrict ng-pristine ng-untouched ng-invalid ng-invalid-required" id="gha_nominee" >
+                                 <div *ngIf="submitted && f.gha_nominee.invalid" class="invalid-feedback">
+					                <div *ngIf="f.gha_nominee.errors.required">Please Enter Name of the Nominee </div>
+					            </div>
+                              </div>
+                           </div>
+
+                           <div class="col-md-3">
+                              <div class="form-group">
+                                 <label>Relationship With Insured
+                                 <span class="required"> * </span></label>
+                                  <input type="text" name="gha_nominee_relation" placeholder="Please Enter Relationship"  [ngClass]="{ 'is-invalid': submitted && f.gha_nominee_relation.errors }"  formControlName="gha_nominee_relation" class="form-control rounded input-sm namerestrict ng-pristine ng-untouched ng-invalid ng-invalid-required ng-valid-maxlength" id="gha_nominee_relation" autocomplete="none" maxlength="20"  >
+                                 <div *ngIf="submitted && f.gha_nominee_relation.invalid" class="invalid-feedback">
+					                <div *ngIf="f.gha_nominee_relation.errors.required">Please Enter Relationship</div>
+					            </div>
+                              </div>
+                           </div> 
+
+                       <!--    <div class="col-md-3">
+                            <div class="form-group">
+                            <label>Address 1
+                           </label>  
+                            <input type="text" name="gha_nominee_address1" id="gha_nominee_address1" ng-model="gha_nominee_address1" formControlName="gha_nominee_address1" class="form-control rounded input-sm ng-pristine ng-untouched ng-valid" placeholder="Address 1" value="" autocomplete="none">
+                            <div ng-if="gha_enrollment_proposal.$submitted || gha_enrollment_proposal.gha_nominee_address1.$dirty" ng-messages="gha_enrollment_proposal.gha_nominee_address1.$error" role="alert">
+                            <div ng-message="required" class="required">Please Enter Address</div>
+                            </div> 
+                            </div>
+                          </div>
+
+                          <div class="col-md-3">
+                            <div class="form-group">
+                            <label>Address 2
+                            </label>  
+                            <input type="text" name="gha_nominee_address2" id="gha_nominee_address2" formControlName="gha_nominee_address2" ng-model="gha_nominee_address2" class="form-control rounded input-sm ng-pristine ng-untouched ng-valid" placeholder="Address 2" value="" autocomplete="none">               
+                         <div ng-if="gha_enrollment_proposal.$submitted || gha_enrollment_proposal.gha_nominee_address2.$dirty" ng-messages="gha_enrollment_proposal.gha_nominee_address2.$error" role="alert">
+                            <div ng-message="required" class="required">Please Enter Address</div>
+                            </div> 
+                            </div>
+                          </div> -->
+
+
+                       <div class="col-md-3">
+                         <div class="form-group">
+                         <label> Nominee DOB 
+                          <span class="required"> * </span></label>
+                          <div class="relative date_pick">
+                          <input type="text" maxlength="30" formControlName="gha_nominee_dob" id="gha_nominee_dob" [minDate]="{year: this.min_date-110, month: min_getmonth-4, day: this.min_getday}" [maxDate]="{year: this.max_date-18, month: min_getmonth, day: this.min_getday}" placeholder="mm/dd/yyyy"  readonly="" ngbDatepicker #nomine="ngbDatepicker" class="form-control"  [ngClass]="{ 'is-invalid': submitted && f.gha_nominee_dob.errors }"  />
+                          <div class="input-group-append">
+                          <button class="btn btn-outline-secondary calendar" (click)="nomine.toggle()" type="button"></button>
+                        </div>
+                        <div *ngIf="submitted && f.gha_nominee_dob.invalid" class="invalid-feedback">
+                                    <div *ngIf="f.gha_nominee_dob.errors.required">Please select Child2 DOB</div>
+                                </div>
+                        </div>
+
+                          <!-- <input type="text" id="gha_nominee_dob" name="gha_nominee_dob"  [ngClass]="{ 'is-invalid': submitted && f.gha_nominee_dob.errors }" autocomplete="none" formControlName="gha_nominee_dob" class="form-control rounded input-sm nominee-date-dob ng-pristine ng-invalid ng-invalid-required ng-touched" placeholder="DD-MM-YYYY" nominee:dob="" ng-model="gha_nominee_dob" data-date-format="dd-mm-yyyy" value="" required=""> -->
+                           <!-- ngIf: gha_enrollment_proposal.$submitted || gha_enrollment_proposal.gha_nominee_dob.$dirty -->
+                        <div id="error-message-nominee" style="color:red;"></div>
+                        </div>
+                    </div>
+                  </div>
+                
+            
+          <br>
+
+
+  
+<div style="padding-left: 0px;padding-right: 0px;">
+  <div class="row">
+               
+        
+
+
+                  <div class="col-md-12">
+                     <div class="float-right pull-right">
+                        <div class="form-group">
+                           <a type="button" class="btn blue btn-default ng-pristine ng-untouched ng-valid" ng-model="back" id="back" href="https://buyuat.bharti-axagi.co.in/group_loan_tap/">Back</a> &nbsp;
+                           <button class="btn blue btn-default ng-pristine ng-untouched ng-valid" >Send link to customer</button>
+                           <button type="button" style="display: none" class="btn blue btn-default ng-pristine ng-untouched ng-valid" ng-model="pleasewaitButton" id="pleasewaitButton" disabled="">Please Wait..</button>
+                        </div>
+                        <div id="error-otp-send" style="color:red;"></div>
+                     </div>
+                  </div>
+                </div> 
+
+                
+
+          
+
+                     
+<h5 style="color:#003399"> <strong>&nbsp;A - Adult &amp; &nbsp;C - Child</strong></h5>
+<h4><label style="color:#003399"><span style="color:red">*</span>&nbsp;Mandatory Fields</label></h4>
+</div>
+
+</div>
+</form>

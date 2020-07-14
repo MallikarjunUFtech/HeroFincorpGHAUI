@@ -1,0 +1,248 @@
+﻿    
+	<style>
+.height{
+	padding-top : 15px;
+}	
+.heigh1t{
+	padding-top : 10px;
+}
+.instructions{
+	padding-top : 15px;
+	font-size: 15px;
+	padding-bottom : 25px;	
+  	color: green;	
+}
+.warning{
+	font-size: 10px;
+  color: blue;
+  font-family: verdana;
+}
+.required{
+	font-size: 12px;
+  color: red;
+}
+</style>
+ <h4>Dependents</h4>
+    <p class="height"></p>
+<form [formGroup]="registerForm" (ngSubmit)="onSubmit()"> 
+<table  class="table table-hover small-text" id="tb">
+<tr class="tr-header">
+<th>Name of the Member</th>
+<th>Relationship with the Proposer</th>
+<th>DOB</th>
+<th>Gender</th>
+<th>Height (In cms)</th>
+<th>Weight (In kg)</th>
+ <tr>
+<td><input readonly type="text" name="fullname[]" formControlName="DOB1" class="form-control" value="{{customer.dependents.firstName}} {{customer.dependents.firstName}}"></td>
+<td><select readonly name="designation[]" class="form-control">
+  <option value="" selected>Self</option>
+    
+</select></td>
+<td><input readonly type="text" name="DOB[]" formControlName="DOB1" class="form-control"></td>
+ <td><input readonly  type="text" name="Gender[]" formControlName="gender1" value="{{customer.dependents.gender}}" class="form-control"></td>
+<td><input readonly type="text" name="height[]" formControlName="height1" class="form-control"></td>
+<td><input readonly type="text" name="weight[]" formControlName="weight1" class="form-control"></td> 
+
+</tr>
+<tr *ngFor="let i of dependentCount">
+<td><input type="text" name="fullname[]" formControlName="fullname{{i}}"  class="form-control"></td>
+<td><select name="relation[]" formControlName="relation{{i}}" class="form-control">
+  <option value="spouse" selected>Spouse</option>
+    <option value="Child">Child</option>
+
+</select></td>
+<td><input type="text" name="DOB[]" formControlName="DOB{{i}}" class="form-control"></td>
+ <td><select name="gender" formControlName="gender{{i}}" class="form-control">
+  <option value="Male">Male </option>
+    <option value="Female" selected>Female</option>
+    <option value="Others">Others</option>
+</select></td>
+<td><input type="text" name="height[]" formControlName="height{{i}}" class="form-control"></td>
+<td><input type="text" name="weight[]" formControlName="weight{{i}}" class="form-control"></td> 
+
+</tr>
+<!-- <tr>
+<td><input type="text" name="fullname[]" formControlName="fullname1"  class="form-control"></td>
+<td><select name="relation[]" formControlName="relation2" class="form-control">
+  <option value="spouse" selected>Spouse</option>
+    <option value="Child">Child</option>
+
+</select></td>
+<td><input type="text" name="DOB[]" formControlName="DOB2" class="form-control"></td>
+ <td><select name="gender" formControlName="gender2" class="form-control">
+  <option value="Male">Male </option>
+    <option value="Female" selected>Female</option>
+    <option value="Others">Others</option>
+</select></td>
+<td><input type="text" name="height[]" formControlName="height2" class="form-control"></td>
+<td><input type="text" name="weight[]" formControlName="weight2" class="form-control"></td> 
+
+</tr>
+
+<tr>
+<td><input type="text" name="fullname[]" formControlName="fullname3" class="form-control"></td>
+<td><select name="designation[]" formControlName="relation3" class="form-control">
+  <option value="" selected>Child 1</option>
+
+</select></td>
+<td><input type="text" name="DOB[]" formControlName="DOB3" class="form-control"></td>
+ <td><select name="gender" class="form-control">
+  <option value="Male" selected>Male </option>
+    <option value="Female">Female</option>
+    <option value="Others">Others</option>
+</select></td>
+<td><input type="text" name="height[]" formControlName="height3" class="form-control"></td>
+<td><input type="text" name="weight[]" formControlName="weight3" class="form-control"></td> 
+
+</tr>
+<tr>
+<td><input type="text" name="fullname[]" class="form-control" formControlName="fullname4"></td>
+<td><select name="designation[]" class="form-control" formControlName="relation4">
+  <option value="Child 2" selected>Child 2</option>
+
+</select></td>
+<td><input type="text" name="DOB[]" class="form-control" formControlName="DOB4"></td>
+ <td><select name="gender" class="form-control">
+  <option value="Male" selected>Male </option>
+    <option value="Female">Female</option>
+    <option value="Others">Others</option>
+</select></td>
+<td><input type="text" name="height[]" formControlName="height4" class="form-control"></td>
+<td><input type="text" name="weight[]" formControlName="weight4" class="form-control"></td> 
+
+</tr>
+<tr>
+<td><input type="text" name="fullname[]" class="form-control" formControlName="fullname5"></td>
+<td><select name="designation[]" class="form-control" formControlName="relation5">
+  <option value="Child 3" selected>Child 3</option>
+
+</select></td>
+<td><input type="text" name="DOB[]" class="form-control" formControlName="DOB5"></td>
+ <td><select name="gender" class="form-control" formControlName="DOB5">
+  <option value="Male" selected>Male </option>
+    <option value="Female">Female</option>
+    <option value="Others">Others</option>
+</select></td>
+<td><input type="text" name="height[]" formControlName="height5" class="form-control"></td>
+<td><input type="text" name="weight[]" formControlName="weight5" class="form-control"></td> 
+
+</tr>
+ --></table>
+    <p class="height"></p>
+<h4>Nominee</h4>
+    <p class="height1"></p>
+<div class="instructions">
+<li> In the event of the death of an Insured Person any payment due under the Policy shall become payable to the nominee in accordance with the Policy terms and conditions.  </li>
+<li>The nominee must be an immediate relative of the Proposer. Nominee for any of the persons proposed to be insured shall be the Proposer.  </li>
+ </div>
+     <p class="height1"></p>
+        <div class="row">
+          <div class="col-md-3">
+    <div class="form-group">
+        <label for="nominee">Nominee <span class="required"> * </span></label>
+        <input type="text" maxlength="30" formControlName="nominee" placeholder="Nominee" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.nominee.errors }" />
+        <div *ngIf="submitted && f.nominee.errors" class="invalid-feedback">
+            <div *ngIf="f.nominee.errors.required">required</div>
+            <div *ngIf="f.nominee.errors.pattern">Please enter Nominee. Only comma (,) apostrophe (') and period (.) is allowed in the name</div>      
+        </div>
+    </div>
+  </div>
+
+  <div class="col-md-3">
+    <div class="form-group">
+        <label for="age">Age <span class="required"> * </span></label>
+        <input type="text" maxlength="30" formControlName="age" placeholder="Age" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.age.errors }" />
+        <div *ngIf="submitted && f.age.errors" class="invalid-feedback">
+            <div *ngIf="f.age.errors.required">required</div>
+                 
+        </div>
+    </div></div>
+
+    <div class="col-md-3">
+    <div class="form-group">
+        <label for="releationship">Releationship</label>
+        <select id="releationship" name="releationship" placeholder="Releationship" class="form-control rounded input-sm ng-pristine ng-untouched ng-invalid ng-invalid-required" (change)="changeCity($event)">
+                                    <option>select one</option>
+                                    <option *ngFor="let sol of Relation" [ngValue]="sol" >{{sol}}
+      </option>
+                                    </select> 
+ <div *ngIf="submitted && f.age.errors" class="invalid-feedback">
+            <div *ngIf="f.age.errors.required">required</div>
+                 
+        </div>
+
+    </div>
+</div>
+
+    <div class="col-md-3">
+    <div class="form-group">
+        <label for="address">Address<span class="required"> * </span></label>
+        <input type="text" maxlength="30" formControlName="address" placeholder="Address" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.address.errors }" />
+        <div *ngIf="submitted && f.address.errors" class="invalid-feedback">
+            <div *ngIf="f.address.errors.required">required</div>
+                  
+        </div>
+    </div></div>
+
+
+         </div>      
+    <p class="height"></p>
+          
+      
+      
+      <h6> <strong>Section A </strong>: Have Insured/ Insured person(s) suffered from/are currently suffering from any of the following:</h6>
+            
+           <div class="row">
+            <div class="col-md-12">
+                  <div class="table-responsive">          
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th>#</th>
+            <th></th>
+                        <th *ngFor="let j of dependentCount">Person {{j}}</th>
+                                               
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let sol of questionaries; let i = index"><td>{{i+1}}</td>
+                      <td >{{sol.question}}</td>
+                      <td *ngFor="let j of dependentCount"><div class="checkbox right" >
+                          <label><input type="checkbox"   (change)="changeSelection(sol.questionaries,j,$event)" value="{{sol.questionaries}}" data-id="j"></label>
+                        </div></td>
+                      <!-- <td><div class="checkbox right" >
+                          <label><input type="checkbox"   (change)="changeSelection(sol.questionaries,1,$event)" value="{{sol.questionaries}}" data-id="1"></label>
+                        </div></td>
+                      <td><div class="checkbox right">
+                          <label><input type="checkbox"  (change)="changeSelection(sol.questionaries,2,$event)" value="{{sol.questionaries}}" data-id="2"></label>
+                        </div></td>
+                      <td><div class="checkbox right">
+                          <label><input type="checkbox"  (change)="changeSelection(sol.questionaries,3,$event)" value="{{sol.questionaries}}" data-id="3"></label>
+                        </div></td>
+                      <td><div class="checkbox right">
+                          <label><input type="checkbox"  (change)="changeSelection(sol.questionaries,4,$event)" value="{{sol.questionaries}}" data-id="4"></label>
+                        </div></td>
+                      <td><div class="checkbox right">
+                          <label><input type="checkbox"  (change)="changeSelection(sol.questionaries,5,$event)" value="{{sol.questionaries}}" data-id="5"></label>
+                        </div></td>  -->   
+                      </tr>
+                    </tbody>
+                  </table>
+                  </div>
+               </div>
+           </div>
+           
+<div class="form-group">
+         <button [disabled]="loading" class="btn btn-primary">
+            <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+            Next
+        </button>
+    &nbsp;&nbsp;
+       <!--  <a routerLink="/payment" class="btn btn-primary">
+            <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+           Next
+        </a> -->
+        <!-- <a routerLink="/" class="btn btn-link">back</a> -->
+    </div>
+</form>

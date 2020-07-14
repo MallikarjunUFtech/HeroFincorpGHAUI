@@ -1,0 +1,416 @@
+
+<div class="container">
+<h4>Enrolment form- Bharti AXA Group Health Assure</h4>
+<style>
+.instructions{
+	padding-top : 15px;
+	font-size: 15px;
+	padding-bottom : 25px;	
+  	color: green;	
+}
+.warning{
+	font-size: 10px;
+  color: blue;
+  font-family: verdana;
+}
+.required{
+	font-size: 12px;
+  color: red;
+}
+
+</style>
+<div class="instructions">
+<li> Please fill all details correctly. </li>
+<li>The insurance is not effective until the proposal is accepted and premium received.</li>
+
+ </div>
+<p class="form-group"></p>
+<form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="register_page">
+     <div class="row">
+        <div class="col-md-3">
+            <div class="form-group">
+                <label for="salutation">Salutation <span class="required"> * </span></label>
+                <select id="salutation" name="salutation"  formControlName="salutation" [ngClass]="{ 'is-invalid': submitted && f.salutation.errors }" class="form-control rounded input-sm ng-pristine ng-untouched ng-invalid ng-invalid-required" (change)="getsalutation($event)">
+                    <option *ngFor="let salutation of Salutation" [ngValue]="salutation" >{{salutation}}
+              </option>
+            </select> 
+                   <div *ngIf="submitted && f.salutation.errors" class="invalid-feedback">
+                    <div *ngIf="f.salutation.errors.required">required</div>
+                           
+                </div>
+            </div>
+        </div>
+<div class="col-md-3">
+    <div class="form-group">
+        <label for="firstName">First Name <span class="required"> * </span></label>
+        <input type="text" maxlength="30" formControlName="firstName" placeholder="First Name" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }" />
+        <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback" (keyup)="checkDisable()">
+            <div *ngIf="f.firstName.errors.required">required</div>
+            <div *ngIf="f.firstName.errors.pattern">Please enter first name. Only comma (,) apostrophe (') and period (.) is allowed in the name</div>			
+        </div>
+    </div></div>
+    <div class="col-md-3">
+    <div class="form-group">
+        <label for="lastName">Last Name <span class="required"> * </span></label>
+        <input type="text" maxlength="30" formControlName="lastName" placeholder="Last Name" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }" />
+        <div *ngIf="submitted && f.lastName.errors" class="invalid-feedback" (keyup)="checkDisable()">
+            <div *ngIf="f.lastName.errors.required">required</div>
+            <div *ngIf="f.lastName.errors.pattern">Please enter first name. Only comma (,) apostrophe (') and period (.) is allowed in the name</div>			
+			
+        </div>
+    </div>
+</div>
+    <div class="col-md-3">
+        <div class="form-group">
+            <label for="gender">Gender <span class="required"> * </span></label>
+            <select id="gender" name="gender" placeholder="Gender" formControlName="gender" [ngClass]="{ 'is-invalid': submitted && f.gender.errors }" class="form-control rounded input-sm ng-pristine ng-untouched ng-invalid ng-invalid-required" (change)="changeGender($event)">
+                <option *ngFor="let sol of gender" [ngValue]="sol" >{{sol}}
+                </option>
+            </select> 
+            <div *ngIf="submitted && f.gender.errors" class="invalid-feedback">
+            <div *ngIf="f.gender.errors.required">required</div>
+            
+        </div>
+        </div>
+    </div>
+ <div class="col-md-3">
+    <div class="form-group">
+        <label for="age">Age <span class="required"> * </span></label>
+        <div class="relative date_pick">
+        <input type="text" maxlength="30" formControlName="age" id="age" [minDate]="{year: this.min_date-50, month: min_getmonth-4, day: this.min_getday}" [maxDate]="{year: this.max_date, month: min_getmonth-2, day: this.min_getday}" placeholder="mm/dd/yyyy"  readonly="" ngbDatepicker #d="ngbDatepicker" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.age.errors }" />
+        <div class="input-group-append">
+        <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
+      </div>
+        <div *ngIf="submitted && f.age.errors" class="invalid-feedback">
+            <div *ngIf="f.age.errors.required">required</div>
+        </div>
+    </div>
+    </div>
+</div>
+
+<!-- <div class="col-md-3">
+    <div class="form-group">
+        <label for="age">Age <span class="required"> * </span></label>
+        <div class="relative date_pick">
+        <input class="form-control" placeholder="mm/dd/yyyy" formControlName="age" id="age" class="form-control input-sm rounded" [ngClass]="{ 'is-invalid': submitted && f.age.errors }"   dateFormat="dd-MMM-yyyy"  ngbDatepicker #d="ngbDatepicker">
+              <div class="input-group-append">
+        <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
+      </div>
+  </div>
+         <input type="text" formControlName="age" id="age" class="form-control input-sm rounded custom-date-dob"  
+          placeholder="DD-MM-YYYY" [ngClass]="{ 'is-invalid': submitted && f.age.errors }"  (keyup)="checkDisable()"/> 
+        <div *ngIf="submitted && f.age.errors" class="invalid-feedback">
+            <div *ngIf="f.age.errors.required">required</div>
+            
+            <div *ngIf="f.age.errors.ageLimit">Policy should not be used for below 91 days and above 60 years</div>
+        </div>
+    </div> 
+    </div> --><div class="col-md-3">
+    <div class="form-group">
+        <label for="mobile">Mobile No. <span class="required"> * </span></label>
+        <input type="text" formControlName="mobile" class="form-control"  (keypress)="restrictAlphabets($event);" (keyup)="mobileValidate($event);" maxlength="10" placeholder="Used for OTP Verification"   pattern="[0-9]+"/>
+        <div id="mobilewar" class="invalid-feedback">please enter a valid 10-digit mobile number</div>  
+        
+    </div></div><div class="col-md-3">
+    <div class="form-group">
+        <label for="email">Email ID <span class="required"> * </span></label>
+        <input type="text" formControlName="email" class="form-control" placeholder="Used for OTP Verification" (keyup)="email_validate($event)"/>
+        <div id="emailwar" class="invalid-feedback">
+          Please enter a valid email address
+        </div>
+    </div></div>
+
+
+<div class="col-md-3">
+        <div class="form-group">
+            <label for="sunAssured">Sum Insured <span class="required"> * </span> <a (click)="openPage()" class="plan_details">See plan details</a></label>
+            <select id="sumAssured" name="sumAssured" formControlName="sumAssured" (change)='sumAssured($event)' class="form-control rounded input-sm ng-pristine ng-untouched ng-invalid ng-invalid-required" [ngClass]="{ 'is-invalid': submitted && f.sumAssured.errors }">
+                <option *ngFor="let suminsured of SumInsured" value={{suminsured.value}} [ngValue]="suminsured.value">{{suminsured.name}}</option>
+            </select> 
+             <div *ngIf="submitted && f.sumAssured.errors" class="invalid-feedback">
+            <div *ngIf="f.sumAssured.errors.required">required</div>
+            <div *ngIf="f.sumAssured.errors.pattern">Enter only number</div>            
+        </div>
+        </div>
+    </div>
+
+<!-- <div class="col-md-3">
+    <div class="form-group">
+        <label for="policy">Policy Tenure </label>
+          
+        <select id="policy" name="policy" [ngClass]="{ 'is-invalid': submitted && f.policy.errors }"  formControlName="policy" class="form-control rounded input-sm ng-pristine ng-untouched ng-invalid ng-invalid-required"  (change)="getpolicy($event)">
+             <option>select one</option>
+            <option *ngFor="let tenure of Tenure" [ngValue]="tenure">{{tenure}}</option>
+        </select> 
+         <div *ngIf="submitted && f.policy.invalid" class="invalid-feedback">
+            <div *ngIf="f.policy.errors.required">required</div>
+        </div>
+    </div> 
+    </div> -->
+    <div class="col-md-3">
+    <div class="form-group">
+        <label for="family">Family Definition <span class="required"> * </span> </label>
+       <select *ngIf='two_lakh' id="family" name="family"  placeholder="Family Definition" class="form-control rounded input-sm" (change)="selectFamily($event)" [ngClass]="{ 'is-invalid': submitted && f.family.errors }"  formControlName="family">
+        <option *ngFor="let family of SumInsured_1A" [ngValue]="family.value" >{{family.name}}</option>
+        </select>
+
+         <select *ngIf='three_lakh' id="family" name="family"  placeholder="Family Definition" class="form-control rounded input-sm" (change)="selectFamily($event)" [ngClass]="{ 'is-invalid': submitted && f.family.errors }"  formControlName="family">
+        <option *ngFor="let family of SumInsured_2A" [ngValue]="family.value" >{{family.name}}</option>
+        </select> 
+
+         <select *ngIf='five_lakh' id="family" name="family"  placeholder="Family Definition" class="form-control rounded input-sm" (change)="selectFamily($event)" [ngClass]="{ 'is-invalid': submitted && f.family.errors }"  formControlName="family">
+        <option *ngFor="let family of SumInsured_2A1C" [ngValue]="family.value" >{{family.name}}</option>
+        </select>
+         <span class="instructions">(A – Adult, C – Child)</span>
+         <div *ngIf="submitted && f.family.invalid" class="invalid-feedback">
+            <div *ngIf="f.family.errors.required">required</div>
+        </div>
+
+
+         <div *ngIf="submitted && f.family.invalid" class="invalid-feedback">
+            <div *ngIf="f.family.errors.required">required</div>
+        </div>
+    </div></div>
+
+  <!--    <div class="col-md-3  plan_div hide_ele">
+        <div class="form-group">
+            <label for="spouse_dob">Spouse DOB</label> <span class="required"> * </span>
+            <input type="text" formControlName="spouse_dob" id="spouse_dob" class="form-control input-sm rounded custom-date-dob"  (change)="spouseDOB($event)" placeholder="DD-MM-YYYY" [ngClass]="{ 'is-invalid': submitted && f.spouse_dob.errors }"/>
+               <div *ngIf="submitted && f.spouse_dob.errors" class="invalid-feedback">
+                <div *ngIf="f.spouse_dob.errors.required">required</div>
+                        
+            </div>
+        </div>
+        </div> -->
+
+
+    <div class="col-md-3">
+    <div class="form-group">
+        <label for="premium">Premium</label> <span class="required"> * </span>
+        <input type="text" readonly formControlName="premium" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.premium.errors }"/>
+           <div *ngIf="submitted && f.premium.errors" class="invalid-feedback">
+            <div *ngIf="f.premium.errors.required">required</div>
+                    
+        </div>
+    </div>
+    </div>
+
+    <!-- <div class="col-md-3">
+    <div class="form-group">
+        <label for="netpremium">Net Premium</label> <span class="required"> * </span>
+        <input type="text" readonly formControlName="netpremium"  class="form-control" [ngClass]="{ 'is-invalid': submitted && f.netpremium.errors }" />
+         <div *ngIf="submitted && f.netpremium.errors" class="invalid-feedback">
+            <div *ngIf="f.netpremium.errors.required">required</div>
+                    
+        </div>
+    </div></div> -->
+
+    <div class="col-md-3">
+    <div class="form-group">
+        <label for="tax">GST</label> <span class="required"> * </span>
+        <input type="text" readonly formControlName="tax" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.tax.errors }" />
+         <div *ngIf="submitted && f.tax.errors" class="invalid-feedback">
+            <div *ngIf="f.tax.errors.required">required</div>
+                    
+        </div>
+    </div></div>
+
+    <div class="col-md-3">
+    <div class="form-group">
+        <label for="totalpremium">Total Premium</label><span class="required"> * </span> 
+        <input type="text" readonly  formControlName="totalpremium" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.totalpremium.errors }" />
+        <div *ngIf="submitted && f.totalpremium.errors" class="invalid-feedback">
+            <div *ngIf="f.totalpremium.errors.required">required</div>
+                    
+        </div>
+    </div></div>
+<!-- 
+    <div class="col-md-3">
+
+    <div class="form-group">
+        <label for="address1">Address 1 <span class="required"> * </span></label>
+        <input type="text" maxlength="30" formControlName="address1" placeholder="Address 1" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.address1.errors }" />
+        <div *ngIf="submitted && f.address1.errors" class="invalid-feedback">
+            <div *ngIf="f.address1.errors.required">required</div>
+        </div>
+    </div></div><div class="col-md-3">
+    <div class="form-group">
+        <label for="address2">Address 2<span class="required"> * </span></label>
+        <input type="text" maxlength="30" formControlName="address2" placeholder="Address 2" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.address2.errors }" />
+        <div *ngIf="submitted && f.address2.errors" class="invalid-feedback">
+            <div *ngIf="f.address2.errors.required">required</div>
+        </div>
+    </div></div><div class="col-md-3">
+    <div class="form-group">
+        <label for="address3">Address 3 <span class="required"> * </span></label>
+        <input type="text" maxlength="30" formControlName="address3" placeholder="Address 3" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.address3.errors }" />
+        <div *ngIf="submitted && f.address3.errors" class="invalid-feedback">
+            <div *ngIf="f.address3.errors.required">required</div>
+            
+        </div>
+    </div></div>
+
+    <div class="col-md-3">
+    <div class="form-group">
+        <label for="age">State <span class="required"> * </span></label>
+       
+        <input type="text" maxlength="30" formControlName="state" placeholder="State" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.state.errors }" />
+        <div *ngIf="submitted && f.state.errors" class="invalid-feedback">
+            <div *ngIf="f.state.errors.required">required</div>
+
+        </div>
+    </div> 
+    </div><div class="col-md-3">
+    <div class="form-group">
+        <label for="mobile">Pin Code<span class="required"> * </span></label>
+        <input type="text" formControlName="pin" class="form-control" placeholder="PIN" [ngClass]="{ 'is-invalid': submitted && f.pin.errors }"  pattern="[0-9]+"/>
+        <div *ngIf="submitted && f.pin.errors" class="invalid-feedback">
+            <div *ngIf="f.pin.errors.required">required</div>
+            <div *ngIf="f.pin.errors.pattern">please enter a valid Pin Code</div>
+        </div>
+    </div></div><div class="col-md-3">
+    <div class="form-group">
+        <label for="email">Pan card No<span class="required"> * </span></label>
+        <input type="text" formControlName="pan" class="form-control" placeholder="PAN No" [ngClass]="{ 'is-invalid': submitted && f.pan.errors }" />
+        <div *ngIf="submitted && f.pan.errors" class="invalid-feedback">
+            <div *ngIf="f.pan.errors.required">required</div>
+             <div *ngIf="f.pan.errors.pattern">Please enter 10 digit valid PAN Number</div>
+        </div>
+    </div>
+</div> -->
+
+</div> <!-- Row end here-->
+  <div id="wrapper">
+    <div><font style="font-size: 19px;color: blue;">Medical Details</font></div>
+       <p></p>
+    <table class="table" id="gha_questions" border="1">
+    <tbody><tr>
+    <td style="border:1px solid black;background-color: #003399;color: white;" colspan="3"><b>Section A :</b> Have Insured/ Insured person(s) suffered from/are currently suffering from any of the following:</td>
+    <td id="insured1_head" style="border:1px solid black;background-color: #003399;color: white;" colspan="2">Insured Person</td>
+    <td  id="insured2_head"  *ngIf='show_plan_2A' style="border:1px solid black;background-color: #003399;color: white;" colspan="2">Spouse</td>
+    <td  id="insured3_head"  *ngIf='show_plan_2A1C' style="border:1px solid black;background-color: #003399;color: white;" colspan="2">Child 1</td>
+    <td  id="insured4_head"  *ngIf='show_plan_2A2C' style="border:1px solid black;background-color: #003399;color: white;" colspan="2">Child 2</td>
+    </tr>
+    
+    
+    <tr class="gha_questions_id">
+  
+    <td class="gha_questions_id" colspan="3"></td> 
+    
+      <td class="insured1" id="">Y</td>
+      <td class="insured1" id="">N</td>
+      <td  class="insured2" id=""  *ngIf='show_plan_2A'>Y</td>
+      <td  class="insured2" id=""  *ngIf='show_plan_2A'>N</td>
+      <td class="insured3" id="" *ngIf='show_plan_2A1C'>Y</td>
+      <td  class="insured3" id="" *ngIf='show_plan_2A1C'>N</td>
+      <td  class="insured4" id="" *ngIf='show_plan_2A2C'>Y</td>
+      <td class="insured4" id="" *ngIf='show_plan_2A2C'>N</td>
+    </tr>
+    
+
+    <tr class="gha_questions_id">
+      <td class="gha_questions_id">1</td>
+      <td class="gha_questions_id" colspan="2">Have you suffered from or are you currently suffering from any disease, illness,
+       disability, injury or accident or advised/ consuming medication or undergone/advised/ awaiting any surgical procedu
+        ( other than Normal /assisted Delivery or Caesarean section without any complication) or undergone any investigations,
+         in the past 4 years?</td>
+       
+        <td><input type="radio" name="gha_self_ques1" value=""  class="ng-pristine ng-untouched ng-valid radio_yes radio_yes" (click)="checkRadioButtonYes()"></td>
+        <td><input type="radio" name="gha_self_ques1" ng-model="gha_self_ques1" id="gha_self_ques1"   class="ng-pristine ng-untouched ng-valid"  [checked]="1"  (click)="checkRadioButtonNo()"></td>
+        <td  *ngIf='show_plan_2A'><input type="radio" name="gha_self_ques2" value="" class="ng-pristine ng-untouched ng-valid radio_yes" (click)="checkRadioButtonYes()"/></td>
+        <td  *ngIf='show_plan_2A'><input type="radio" name="gha_self_ques2"   id="gha_self_ques2"   class="ng-pristine ng-untouched ng-valid"  [checked]="1"  (click)="checkRadioButtonNo()"></td>
+         <td  *ngIf='show_plan_2A1C'><input type="radio" name="gha_self_ques1_1" value=""  class="ng-pristine ng-untouched ng-valid radio_yes radio_yes" (click)="checkRadioButtonYes()"></td>
+        <td *ngIf='show_plan_2A1C'><input type="radio" name="gha_self_ques1_1" ng-model="gha_self_ques1" id="gha_self_ques1"   class="ng-pristine ng-untouched ng-valid"  [checked]="1"  (click)="checkRadioButtonNo()"></td>
+        <td  *ngIf='show_plan_2A2C'><input type="radio" name="gha_self_ques2_1" value="" class="ng-pristine ng-untouched ng-valid radio_yes" (click)="checkRadioButtonYes()"/></td>
+        <td  *ngIf='show_plan_2A2C'><input type="radio" name="gha_self_ques2_1"   id="gha_self_ques2"   class="ng-pristine ng-untouched ng-valid"  [checked]="1"  (click)="checkRadioButtonNo()"></td>
+       
+    </tr>
+    <tr class="gha_questions_id">
+    <td class="gha_questions_id">2</td>
+      <td class="gha_questions_id" colspan="2">
+      Have you ever had or has a doctor ever said that you have any of the  following conditions / diseases -: High or low blood pressure,
+       diabetes or sugar, any heart related ailment, brain stroke, Paralysis, TB or asthma or breathing problem, tumor or cancer, liver or
+        gall bladder diseases, stomach or Duodenal disorder prostrate, intestinal tract disorder,  kidney or stone diseases, arthritis or
+         bone disease, blood diseases or disorders,  Eye or ENT disease, dizziness or fits, HIV/AIDS / any other sexually tansmitted disease, 
+         Ulcer (Stomach / Intestine), Anaemia, Leukaemia or any other blood/lymphatic system disorder, multiple sclerosis, epilepsy, tremors, 
+         paralysis, psychiatric/mental illnesses or sleep disorder, Thyroid/Pituitary disorder / disease or any other endocrine disorder / 
+         disease, Psychiatric/ Mental illnesses or sleep disorder / disease, Heamophilia, cystic fibrosis, down syndrome, sickele cell, 
+         polycystic kidney disease or any other genetic disorder / disease,  Dysfunctional uterine bleeding, Fibroid, Cyst / Fibroadenoma 
+         or any other Gynaecological disorder, or  suffered from any congenital disease, anamolies like congenital Heart disease, cleft palate or 
+       any other disorder / disease.</td>
+     
+        <td><input type="radio" name="gha_self_ques3" value="" class="ng-pristine ng-untouched ng-valid radio_yes" (click)="checkRadioButtonYes()"/></td>
+        <td><input type="radio" name="gha_self_ques3"  id="gha_self_ques3"   class="ng-pristine ng-untouched ng-valid"  [checked]="1"  (click)="checkRadioButtonNo()"></td>
+        <td *ngIf='show_plan_2A'><input type="radio" name="gha_self_ques4" value="1" class="ng-pristine ng-untouched ng-valid radio_yes" (click)="checkRadioButtonYes()"/></td>
+        <td *ngIf='show_plan_2A'><input type="radio" name="gha_self_ques4"  id="gha_self_ques4"  class="ng-pristine ng-untouched ng-valid"  [checked]="1"  (click)="checkRadioButtonNo()"></td>
+        <td *ngIf='show_plan_2A1C'><input type="radio" name="gha_self_ques3_1" value=""  class="ng-pristine ng-untouched ng-valid radio_yes radio_yes" (click)="checkRadioButtonYes()"></td>
+        <td *ngIf='show_plan_2A1C'><input type="radio" name="gha_self_ques3_1" ng-model="gha_self_ques1" id="gha_self_ques1"  class="ng-pristine ng-untouched ng-valid"  [checked]="1"  (click)="checkRadioButtonNo()"></td>
+        <td  *ngIf='show_plan_2A2C'><input type="radio" name="gha_self_ques4_1" value="" class="ng-pristine ng-untouched ng-valid radio_yes" (click)="checkRadioButtonYes()"/></td>
+        <td  *ngIf='show_plan_2A2C'><input type="radio" name="gha_self_ques4_1"   id="gha_self_ques2"   class="ng-pristine ng-untouched ng-valid"  [checked]="1"  (click)="checkRadioButtonNo()"></td>
+        
+   
+    </tr>
+    <tr>
+    <td class="gha_questions_id">3</td>
+      <td class="gha_questions_id" colspan="2">Have you or any other member(s) proposed to be insured taken any medication
+       for more than 2 weeks in last 5 years?</td>
+        <td><input type="radio" name="gha_self_ques5"  value="" class="ng-pristine ng-untouched ng-valid radio_yes" (click)="checkRadioButtonYes()"/></td>
+        <td><input type="radio"  name="gha_self_ques5"  id="gha_self_ques5"   class="ng-pristine ng-untouched ng-valid"  [checked]="1"  (click)="checkRadioButtonNo()"></td>
+        <td *ngIf='show_plan_2A'><input type="radio" name="gha_self_ques6" value="" class="ng-pristine ng-untouched ng-valid radio_yes" (click)="checkRadioButtonYes()"/></td>
+        <td  *ngIf='show_plan_2A'><input type="radio" name="gha_self_ques6"  id="gha_self_ques6" class="ng-pristine ng-untouched ng-valid"  [checked]="1"  (click)="checkRadioButtonNo()"></td>
+         <td *ngIf='show_plan_2A1C'><input type="radio" name="gha_self_ques5_1" value=""  class="ng-pristine ng-untouched ng-valid radio_yes radio_yes" (click)="checkRadioButtonYes()"></td>
+        <td *ngIf='show_plan_2A1C'><input type="radio" name="gha_self_ques5_1" ng-model="gha_self_ques1" id="gha_self_ques1"  class="ng-pristine ng-untouched ng-valid"  [checked]="1"  (click)="checkRadioButtonNo()"></td>
+        <td  *ngIf='show_plan_2A2C'><input type="radio" name="gha_self_ques6_1" value="" class="ng-pristine ng-untouched ng-valid radio_yes" (click)="checkRadioButtonYes()"/></td>
+        <td  *ngIf='show_plan_2A2C'><input type="radio" name="gha_self_ques6_1"   id="gha_self_ques2"  class="ng-pristine ng-untouched ng-valid"  [checked]="1"  (click)="checkRadioButtonNo()"></td>
+        
+    
+    </tr>
+    <tr>
+    <td class="gha_questions_id">4</td>
+      <td class="gha_questions_id" colspan="2">Has any application for life, Health or critical illness
+       insurance ever been declined, postponed, loaded or been made subject to any special conditions
+        by any insurance company?</td>
+       
+        <td><input type="radio" name="gha_self_ques7" value="" class="ng-pristine ng-untouched ng-valid radio_yes" (click)="checkRadioButtonYes()"/></td>
+        <td><input type="radio"  name="gha_self_ques7"  id="gha_self_ques7" class="ng-pristine ng-untouched ng-valid"  [checked]="1"  (click)="checkRadioButtonNo()"></td>
+        <td *ngIf='show_plan_2A'><input type="radio" name="gha_self_ques8" value="" class="ng-pristine ng-untouched ng-valid radio_yes" (click)="checkRadioButtonYes()"/></td>
+        <td *ngIf='show_plan_2A'><input type="radio"  name="gha_self_ques8"  id="gha_self_ques8"  class="ng-pristine ng-untouched ng-valid" [checked]="1"(click)="checkRadioButtonNo()"></td>
+         <td *ngIf='show_plan_2A1C'><input type="radio" name="gha_self_ques7_1" value=""  class="ng-pristine ng-untouched ng-valid radio_yes radio_yes" (click)="checkRadioButtonYes()"></td>
+        <td *ngIf='show_plan_2A1C'><input type="radio" name="gha_self_ques7_1" ng-model="gha_self_ques1" id="gha_self_ques1" class="ng-pristine ng-untouched ng-valid"  [checked]="1"  (click)="checkRadioButtonNo()"></td>
+        <td  *ngIf='show_plan_2A2C'><input type="radio" name="gha_self_ques7_1" value="" class="ng-pristine ng-untouched ng-valid radio_yes" (click)="checkRadioButtonYes()"/></td>
+        <td  *ngIf='show_plan_2A2C'><input type="radio" name="gha_self_ques7_1"   id="gha_self_ques2"   class="ng-pristine ng-untouched ng-valid"  [checked]="1"  (click)="checkRadioButtonNo()"></td>
+       
+        
+    </tr>
+    <tr>
+    <td class="gha_questions_id">5</td>
+      <td class="gha_questions_id" colspan="2">Please confirm, if any of the person to be insured is pregnant? If yes, please answer as below:- 
+      <br><br>
+      a) Duration in weeks <br>
+      b) Expected delivery date<br> 
+      c) Any complications during previous pregnancy?
+       </td>
+       
+       
+        <td><input type="radio" name="gha_self_ques9"   id="" value="" class="ng-pristine ng-untouched ng-valid radio_yes" (click)="checkRadioButtonYes()"/></td>
+        <td><input type="radio" name="gha_self_ques9"   id="" class="ng-pristine ng-untouched ng-valid" [checked]="1"  (click)="checkRadioButtonNo()"></td>
+        <td *ngIf='show_plan_2A'><input type="radio" name="gha_self_ques10"  id="" value="" class="ng-pristine ng-untouched ng-valid radio_yes"  (click)="checkRadioButtonYes()"></td>
+        <td *ngIf='show_plan_2A'><input type="radio" name="gha_self_ques10"    id="gha_self_ques10" class="ng-pristine ng-untouched ng-valid" [checked]="1"  (click)="checkRadioButtonNo()"></td>
+         <td *ngIf='show_plan_2A1C'><input type="radio" name="gha_self_ques9_1" value=""  class="ng-pristine ng-untouched ng-valid radio_yes radio_yes" (click)="checkRadioButtonYes()"></td>
+        <td *ngIf='show_plan_2A1C'><input type="radio" name="gha_self_ques9_1" ng-model="gha_self_ques1" id="gha_self_ques1"  class="ng-pristine ng-untouched ng-valid"  [checked]="1"  (click)="checkRadioButtonNo()"></td>
+        <td  *ngIf='show_plan_2A2C'><input type="radio" name="gha_self_ques10_1" value="" class="ng-pristine ng-untouched ng-valid radio_yes" (click)="checkRadioButtonYes()"/></td>
+        <td  *ngIf='show_plan_2A2C'><input type="radio" name="gha_self_ques10_1"   id="gha_self_ques2"   class="ng-pristine ng-untouched ng-valid"  [checked]="1"  (click)="checkRadioButtonNo()"></td>
+
+     </tr>
+  </tbody>
+</table>
+</div>	
+	<div class="form-group">
+        <button  [disabled]="this.radioButton == false || !this.registerForm.value.salutation || !this.registerForm.value.firstName || !this.registerForm.value.lastName || !this.registerForm.value.gender || !this.registerForm.value.mobile ||  !this.registerForm.value.email || !this.registerForm.value.sumAssured || !this.registerForm.value.family" class="btn btn-primary">
+            <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+            Proceed
+        </button> &nbsp; &nbsp;
+        <!--  <a routerLink="/dependent" class="btn btn-primary">Proceed</a> -->
+    </div>
+</form>
+    </div>
